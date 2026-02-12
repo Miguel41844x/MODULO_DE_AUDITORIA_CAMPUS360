@@ -1,0 +1,10 @@
+.detail-box {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+}
+
+.detail-box p {
+  margin: 8px 0;
+}

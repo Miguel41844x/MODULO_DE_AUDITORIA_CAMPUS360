@@ -1,0 +1,23 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #eef1f5;
+}
+
+/* Layout general */
+.layout {
+  display: flex;
+  height: calc(100vh - 60px); /* resta la altura del navbar */
+}
+
+/* Contenido principal */
+.content {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* Título */
+.content h2 {
+  margin-top: 0;
+}
