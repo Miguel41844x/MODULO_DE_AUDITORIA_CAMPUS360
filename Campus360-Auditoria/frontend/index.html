@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<title>Campus360 - Auditoría</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="layout">
+
+<aside class="sidebar">
+<h2>Campus360</h2>
+<nav>
+<ul>
+<li class="active">Auditoría</li>
+</ul>
+</nav>
+</aside>
+
+<main class="content">
+
+<header>
+<h1>Panel de Auditoría y Monitoreo</h1>
+</header>
+
+<section class="filters card">
+<input type="date" id="startDate">
+<input type="date" id="endDate">
+<input type="text" id="userFilter" placeholder="Usuario">
+<select id="actionFilter">
+<option value="">Acción</option>
+<option value="CREATED">CREATED</option>
+<option value="UPDATED">UPDATED</option>
+<option value="APPROVED">APPROVED</option>
+</select>
+<button onclick="applyFilters()">Buscar</button>
+<button onclick="exportData()">Exportar</button>
+</section>
+
+<section class="card">
+<table>
+<thead>
+<tr>
+<th>Fecha</th>
+<th>Usuario</th>
+<th>Acción</th>
+<th>Entidad</th>
+<th>Detalle</th>
+</tr>
+</thead>
+<tbody id="tableBody"></tbody>
+</table>
+</section>
+
+</main>
+</div>
+
+<div id="modal" class="modal hidden">
+<div class="modal-content">
+<span onclick="closeModal()">×</span>
+<pre id="modalContent"></pre>
+</div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

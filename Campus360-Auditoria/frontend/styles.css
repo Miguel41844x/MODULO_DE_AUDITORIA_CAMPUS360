@@ -1,0 +1,78 @@
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+margin:0;
+font-family:'Segoe UI',sans-serif;
+background:#F3F4F6;
+}
+
+.layout {
+display:flex;
+height:100vh;
+}
+
+.sidebar {
+width:220px;
+background:#1F3A8A;
+color:white;
+padding:20px;
+}
+
+.content {
+flex:1;
+padding:20px;
+}
+
+.card {
+background:white;
+padding:15px;
+margin-bottom:20px;
+border-radius:6px;
+box-shadow:0 2px 5px rgba(0,0,0,0.05);
+}
+
+table {
+width:100%;
+border-collapse:collapse;
+}
+
+th, td {
+padding:10px;
+border-bottom:1px solid #E5E7EB;
+}
+
+button {
+background:#2563EB;
+color:white;
+border:none;
+padding:8px 12px;
+cursor:pointer;
+}
+
+button:hover {
+background:#1F3A8A;
+}
+
+.modal {
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.5);
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+.modal-content {
+background:white;
+padding:20px;
+width:400px;
+}
+
+.hidden {
+display:none;
+}

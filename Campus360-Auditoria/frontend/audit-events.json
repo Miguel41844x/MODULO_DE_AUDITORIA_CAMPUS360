@@ -1,0 +1,24 @@
+[
+{
+"id":1,
+"timestamp":"2026-05-01 10:15",
+"user":"admin",
+"role":"Administrador",
+"action":"CREATED",
+"entity":"Solicitud",
+"entityId":"SOL-001",
+"oldValue":null,
+"newValue":"Solicitud creada"
+},
+{
+"id":2,
+"timestamp":"2026-05-02 11:30",
+"user":"auditor1",
+"role":"Auditor",
+"action":"UPDATED",
+"entity":"Solicitud",
+"entityId":"SOL-001",
+"oldValue":"Pendiente",
+"newValue":"Aprobada"
+}
+]
