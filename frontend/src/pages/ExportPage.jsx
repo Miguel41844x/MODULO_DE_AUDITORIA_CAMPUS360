@@ -1,20 +1,42 @@
-import "./ExportPage.css";
+  import "./ExportPage.css";
 
-function ExportPage() {
+  function ExportPage() {
 
-  const handleExport = () => {
-    alert("Archivo exportado correctamente (simulado)");
-  };
+    const handleExport = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:8080/api/auditoria/exportar"
+        );
 
-  return (
-    <div className="page">
-      <h2>Exportar Bitácora</h2>
-      <div className="export-box">
-        <p>Descargar los registros en formato CSV.</p>
-        <button onClick={handleExport}>Exportar</button>
-      </div> 
-    </div>
-  );
-}
+        if (!response.ok) {
+          throw new Error("Error al exportar");
+        }
 
-export default ExportPage;
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "bitacora.xlsx";
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+
+      } catch (error) {
+        console.error(error);
+        alert("Error al exportar archivo");
+      }
+    };
+
+    return (
+      <div className="page">
+        <h2>Exportar Bitácora</h2>
+        <div className="export-box">
+          <p>Descargar los registros en formato Excel.</p>
+          <button onClick={handleExport}>Exportar</button>
+        </div>
+      </div>
+    );
+  }
+
+  export default ExportPage;

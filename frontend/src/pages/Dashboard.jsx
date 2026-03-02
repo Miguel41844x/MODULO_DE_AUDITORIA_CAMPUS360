@@ -4,13 +4,19 @@ import Filters from "../components/Filters";
 import "./Dashboard.css";
 
 function Dashboard() {
-  const [filter, setFilter] = useState("");
+
+  const [filters, setFilters] = useState({
+    usuario: "",
+    fecha: ""
+  });
 
   return (
     <div className="page">
       <h2>Bitácora de eventos</h2>
-      <Filters setFilter={setFilter} />
-      <EventTable filter={filter} />
+
+      <Filters setFilters={setFilters} />
+
+      <EventTable filters={filters} />
     </div>
   );
 }

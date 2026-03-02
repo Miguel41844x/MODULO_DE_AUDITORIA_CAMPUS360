@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./AuditPage.css";
 import Navbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
@@ -7,8 +7,16 @@ import EventTable from "../components/EventTable";
 import "../App.css";
 
 function AuditPage() {
-  const [filter, setFilter] = useState("");
-
+  
+  useEffect(() => {
+    fetch("http://localhost:8080/api/auditoria")
+      .then(response => response.json())
+      .then(data => {
+        setEventos(data);
+      })
+      .catch(error => console.error("Error:", error));
+  }, []);
+  
   return (
     <>
       <Navbar />

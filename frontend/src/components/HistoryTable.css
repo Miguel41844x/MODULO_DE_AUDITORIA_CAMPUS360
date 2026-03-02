@@ -1,4 +1,4 @@
-.event-table {
+.event-history {
   width: 100%;
   border-collapse: collapse;
   background-color: white;
@@ -6,28 +6,28 @@
   overflow: hidden;
 }
 
-.event-table th {
+.event-history th {
   background-color: #2c3e50;
   color: white;
   padding: 12px;
   text-align: left;
 }
 
-.event-table td {
+.event-history td {
   padding: 12px;
   border-bottom: 1px solid #eee;
 }
 
-.event-table tr:hover {
+.event-history tr:hover {
   background-color: #f7f9fb;
 }
 
-.event-table a {
+.event-history a {
   color: #2c3e50;
   text-decoration: none;
   font-weight: bold;
 }
 
-.event-table a:hover {
+.event-history a:hover {
   text-decoration: underline;
 }
