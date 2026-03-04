@@ -98,6 +98,6 @@ Para ejecutar el sistema se deben seguir los siguientes pasos:
 
 ## Autoría
 
-Proyecto desarrollado como parte del curso de Arquitectura de Software.
+Proyecto desarrollado como parte del curso de Diseño de Sistemas de Información.
 
 Grupo 09
