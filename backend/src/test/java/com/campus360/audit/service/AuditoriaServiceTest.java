@@ -31,7 +31,7 @@ public class AuditoriaServiceTest {
         service = new AuditoriaService(eventoRepo, entidadRepo, usuarioRepo);
     }
 
-    // 1️⃣ obtenerTodos()
+    // 1 obtenerTodos()
 
     @Test
     void testObtenerTodos() {
@@ -46,7 +46,7 @@ public class AuditoriaServiceTest {
         assertEquals("CREAR", resultado.get(0).getAccion());
     }
 
-    // 2️⃣ obtenerHistorial()
+    // 2 obtenerHistorial()
 
     @Test
     void testObtenerHistorial() {
@@ -61,7 +61,7 @@ public class AuditoriaServiceTest {
         assertEquals(1, resultado.size());
     }
 
-    // 3️⃣ guardarEvento() correcto
+    // 3 guardarEvento() correcto
 
     @Test
     void testGuardarEventoCorrecto() {
@@ -91,7 +91,7 @@ public class AuditoriaServiceTest {
         verify(eventoRepo, times(1)).save(evento);
     }
 
-    // 4️⃣ guardarEvento() usuario no existe
+    // 4 guardarEvento() usuario no existe
 
     @Test
     void testGuardarEventoUsuarioNoExiste() {
@@ -112,7 +112,7 @@ public class AuditoriaServiceTest {
         assertEquals("Usuario no existe", ex.getMessage());
     }
 
-    // 5️⃣ registrarCambioEstado()
+    // 5 registrarCambioEstado()
 
     @Test
     void testRegistrarCambioEstado() {
@@ -141,7 +141,7 @@ public class AuditoriaServiceTest {
                 resultado.getCambios().get(0).getValorNuevo());
     }
 
-    // 6️⃣ obtenerEventosParaExportar()
+    // 6 obtenerEventosParaExportar()
 
     @Test
     void testObtenerEventosParaExportar() {
