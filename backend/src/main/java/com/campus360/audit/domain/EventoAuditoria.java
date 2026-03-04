@@ -89,11 +89,74 @@ public class EventoAuditoria {
     public void setCambios(List<Cambio> cambios) {
         this.cambios = cambios;
 
-        // MUY IMPORTANTE: enlazar cada cambio con el evento
+        // Enlazar cada cambio con el evento
         if (cambios != null) {
             for (Cambio c : cambios) {
                 c.setEvento(this);
             }
         }
+    }
+
+    /*
+     =========================
+     BUILDER PATTERN
+     =========================
+     */
+    public static class Builder {
+
+        private EventoAuditoria evento;
+
+        public Builder() {
+            evento = new EventoAuditoria();
+        }
+
+        public Builder accion(String accion) {
+            evento.setAccion(accion);
+            return this;
+        }
+
+        public Builder descripcion(String descripcion) {
+            evento.setDescripcion(descripcion);
+            return this;
+        }
+
+        public Builder usuario(Usuario usuario) {
+            evento.setUsuario(usuario);
+            return this;
+        }
+
+        public Builder entidad(Entidad entidad) {
+            evento.setEntidad(entidad);
+            return this;
+        }
+
+        public Builder cambios(List<Cambio> cambios) {
+            evento.setCambios(cambios);
+            return this;
+        }
+
+        public EventoAuditoria build() {
+
+            if (evento.accion == null || evento.accion.isEmpty()) {
+                throw new IllegalStateException("La acción es obligatoria");
+            }
+
+            if (evento.usuario == null) {
+                throw new IllegalStateException("El usuario es obligatorio");
+            }
+
+            if (evento.entidad == null) {
+                throw new IllegalStateException("La entidad es obligatoria");
+            }
+
+            return evento;
+        }
+    }
+
+    /*
+     Método estático para iniciar el builder
+     */
+    public static Builder builder() {
+        return new Builder();
     }
 }

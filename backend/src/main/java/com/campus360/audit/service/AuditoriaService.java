@@ -36,34 +36,31 @@ public class AuditoriaService {
         return eventoRepo.findByEntidad_IdEntidad(idEntidad);
     }
 
-    
     /*
-      MÉTODOS PRIVADOS PARA REFACTORIZACIÓN DE CODE SMELL: CÓDIGO DUPLICADO
+      MÉTODOS PRIVADOS (REFACTORIZACIÓN)
      */
     private Usuario obtenerUsuario(Long id) {
         return usuarioRepo.findById(id)
-            .orElseThrow(() -> new RuntimeException("Usuario no existe"));
+                .orElseThrow(() -> new RuntimeException("Usuario no existe"));
     }
 
     private Entidad obtenerEntidad(Long id) {
         return entidadRepo.findById(id)
-            .orElseThrow(() -> new RuntimeException("Entidad no existe"));
+                .orElseThrow(() -> new RuntimeException("Entidad no existe"));
     }
-    
-    
-    
+
     /*
       GUARDAR EVENTO (POSTMAN)
      */
     public EventoAuditoria guardarEvento(EventoAuditoria evento) {
 
-    	Usuario usuario = obtenerUsuario(
-    		    evento.getUsuario().getIdUsuario()
-    	);
+        Usuario usuario = obtenerUsuario(
+                evento.getUsuario().getIdUsuario()
+        );
 
-    	Entidad entidad = obtenerEntidad(
-    		    evento.getEntidad().getIdEntidad()
-    	);
+        Entidad entidad = obtenerEntidad(
+                evento.getEntidad().getIdEntidad()
+        );
 
         evento.setUsuario(usuario);
         evento.setEntidad(entidad);
@@ -79,38 +76,36 @@ public class AuditoriaService {
     }
 
     /*
-      REGISTRAR CAMBIO AUTOMATICO
+      REGISTRAR CAMBIO AUTOMATICO (USANDO BUILDER)
      */
     public EventoAuditoria registrarCambioEstado(Long entidadId,
                                                  String nuevoEstado,
                                                  Long usuarioId) {
 
-        Entidad entidad = entidadRepo.findById(entidadId)
-                .orElseThrow(() -> new RuntimeException("Entidad no encontrada"));
+        Entidad entidad = obtenerEntidad(entidadId);
+        Usuario usuario = obtenerUsuario(usuarioId);
 
-        Usuario usuario = usuarioRepo.findById(usuarioId)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-
-        EventoAuditoria evento = new EventoAuditoria();
-        evento.setAccion("CAMBIO_ESTADO");
-        evento.setDescripcion("Cambio automático de estado");
-        evento.setUsuario(usuario);
-        evento.setEntidad(entidad);
-
+        // Crear cambio
         Cambio cambio = new Cambio();
         cambio.setCampo("estado");
         cambio.setValorAntiguo("Anterior");
         cambio.setValorNuevo(nuevoEstado);
-        cambio.setEvento(evento);
 
-        evento.setCambios(List.of(cambio));
+        // Crear evento usando BUILDER
+        EventoAuditoria evento = EventoAuditoria.builder()
+                .accion("CAMBIO_ESTADO")
+                .descripcion("Cambio automático de estado")
+                .usuario(usuario)
+                .entidad(entidad)
+                .cambios(List.of(cambio))
+                .build();
 
         return eventoRepo.save(evento);
     }
-    
-    
-    /*Convertir de H2 a DTO*/
-    
+
+    /*
+      CONVERTIR A DTO
+     */
     public List<EventoExportDTO> obtenerEventosParaExportar() {
 
         List<EventoAuditoria> eventos = eventoRepo.findAll();
@@ -125,5 +120,4 @@ public class AuditoriaService {
                 e.getDescripcion()
         )).toList();
     }
-    
 }
