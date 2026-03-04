@@ -36,20 +36,34 @@ public class AuditoriaService {
         return eventoRepo.findByEntidad_IdEntidad(idEntidad);
     }
 
+    
+    /*
+      MÉTODOS PRIVADOS PARA REFACTORIZACIÓN DE CODE SMELL: CÓDIGO DUPLICADO
+     */
+    private Usuario obtenerUsuario(Long id) {
+        return usuarioRepo.findById(id)
+            .orElseThrow(() -> new RuntimeException("Usuario no existe"));
+    }
+
+    private Entidad obtenerEntidad(Long id) {
+        return entidadRepo.findById(id)
+            .orElseThrow(() -> new RuntimeException("Entidad no existe"));
+    }
+    
+    
+    
     /*
       GUARDAR EVENTO (POSTMAN)
      */
     public EventoAuditoria guardarEvento(EventoAuditoria evento) {
 
-        // Validar usuario
-        Usuario usuario = usuarioRepo.findById(
-                evento.getUsuario().getIdUsuario()
-        ).orElseThrow(() -> new RuntimeException("Usuario no existe"));
+    	Usuario usuario = obtenerUsuario(
+    		    evento.getUsuario().getIdUsuario()
+    	);
 
-        // Validar entidad
-        Entidad entidad = entidadRepo.findById(
-                evento.getEntidad().getIdEntidad()
-        ).orElseThrow(() -> new RuntimeException("Entidad no existe"));
+    	Entidad entidad = obtenerEntidad(
+    		    evento.getEntidad().getIdEntidad()
+    	);
 
         evento.setUsuario(usuario);
         evento.setEntidad(entidad);
